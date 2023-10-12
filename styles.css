@@ -1,0 +1,10 @@
+body {
+    background-color: black;
+    font-family: Futura;
+    color: white;
+}
+ #header {
+    font-size: 36px;
+    font-family: inherit;
+    color: inherit;
+ }
