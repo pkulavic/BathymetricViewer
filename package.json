@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
-    "build": "webpack"
+    "build": "webpack",
+    "preprocess-data": "node scripts/processData.mjs",
+    "prebuild": "npm run preprocess-data"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,8 @@
     "three": "^0.162.0"
   },
   "devDependencies": {
+    "fs-extra": "^11.2.0",
+    "papaparse": "^5.4.1",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.3"
