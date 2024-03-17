@@ -27,23 +27,24 @@ loadESRIASCII(url)
     document.body.appendChild(renderer.domElement);
 
     // Create a material
-    // const material = new THREE.MeshPhongMaterial({
-    // vertexColors: true,
-    // side: THREE.DoubleSide,
-    // shininess: 0,
-    // });
+    const material = new THREE.MeshPhongMaterial({
+    vertexColors: true,
+    side: THREE.DoubleSide,
+    shininess: 1,
+    });
     // Create a MeshLambertMaterial
     // const material = new THREE.MeshLambertMaterial({
     //     vertexColors: true,
-    //     side: THREE.BackSide,
+    //     side: THREE.DoubleSide,
     // });
 
     // const material = new THREE.MeshBasicMaterial({side: THREE.BackSide});
-    const material = new THREE.MeshStandardMaterial({side: THREE.DoubleSide, vertexColors: true})
+    // const material = new THREE.MeshStandardMaterial({side: THREE.DoubleSide, vertexColors: true})
 
     // Create a mesh using the terrain geometry and material
     const terrainMesh = new THREE.Mesh(geometry, material);
     scene.add(terrainMesh);
+    console.log(terrainMesh);
 
 
     // Calculate the bounding box of the geometry
@@ -52,7 +53,7 @@ loadESRIASCII(url)
     const size = boundingBox.getSize(new THREE.Vector3());
 
     // Position the camera to look down on the terrain
-    const cameraDistance = Math.max(size.y) * 1.5; // Adjust the multiplier as needed
+    const cameraDistance = Math.max(size.y) * 4; // Adjust the multiplier as needed
     camera.position.set(center.x, cameraDistance, center.z);
     camera.lookAt(center);
 
@@ -81,7 +82,7 @@ loadESRIASCII(url)
     // controls.update();
     // Create an instance of FlyControls
     const controls = new FlyControls(camera, renderer.domElement);
-    controls.movementSpeed = 100000; // Adjust the movement speed as needed
+    controls.movementSpeed = 75000; // Adjust the movement speed as needed
     controls.rollSpeed = Math.PI / 6; // Adjust the roll speed as needed
     controls.autoForward = false; // Set to true if you want automatic forward movement
     controls.dragToLook = true; // Set to true to enable drag to look around

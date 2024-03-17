@@ -12,7 +12,8 @@ export function createBufferGeometry(header, data) {
         const x = j * cellsize;
         const elevationScale = 10; // Adjust the scaling factor as needed
         const y = elevation * elevationScale;
-        const z = (nrows - i - 1) * cellsize;
+        const z = i * cellsize;
+        // const z = (nrows - i - 1) * cellsize;
   
         positions.push(x, y, z);
   
@@ -29,6 +30,18 @@ export function createBufferGeometry(header, data) {
     geometry.setIndex(indices);
     geometry.computeVertexNormals();
 
+    let maxDepth = 0;
+
+    for (let i = 0; i < nrows; i++) {
+      for (let j = 0; j < ncols; j++) {
+        const elevation = data[i][j];
+  
+        if (!isNaN(elevation) && elevation < 0) {
+          maxDepth = Math.max(maxDepth, Math.abs(elevation));
+        }
+      }
+    }
+
     const colors = [];
     for (let i = 0; i < positions.length; i += 3) {
         const elevation = positions[i + 1];
@@ -40,7 +53,15 @@ export function createBufferGeometry(header, data) {
             color.setRGB(0, 0.5, 0) // green = land
         }
         else if (elevation < 0) {
-            color.setRGB(0, 0, 0.75) // blue = ocean
+            // Below sea level (negative values)
+            const normalizedDepth = Math.min(Math.abs(elevation) / maxDepth, 1);
+            const hue = 0.6; // Blue hue
+            const saturation = 1;
+            const lightness = 1 - normalizedDepth * 0.9; // Adjust the multiplier to control the gradient
+        
+            color.setHSL(hue, saturation, lightness);
+        // else if (elevation < 0) {
+        //     color.setRGB(0, 0, 0.75) // blue = ocean
         }
         colors.push(color.r, color.g, color.b);
     }
