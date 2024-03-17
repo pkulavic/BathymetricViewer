@@ -11,34 +11,6 @@ loadESRIASCII(url)
       // Process the header and data as needed
       console.log(result);
       const geometry = createBufferGeometry(result.header, result.data)
-      const colors = [];
-      const positions = geometry.attributes.position.array;
-      for (let i = 0; i < positions.length; i += 3) {
-        const elevation = positions[i + 1]; // Assuming y-coordinate represents elevation
-      
-        if (isNaN(elevation)) {
-          // Handle invalid elevation values
-          colors.push(0, 0, 0); // Assign a default color (e.g., black)
-          continue;
-        }
-      
-        const color = new THREE.Color();
-      
-        // Map elevation to a color gradient
-        if (elevation < 0) {
-          // Below sea level (negative values)
-          const normalizedElevation = Math.max(elevation / -1000, -1);
-          color.setHSL(0.6, 1, 0.5 + (normalizedElevation + 1) / 2); // Blue to black
-        } else {
-          // Above sea level (positive values)
-          const normalizedElevation = Math.min(elevation / 1000, 1);
-          color.setHSL(0.3, 1, 0.5 + normalizedElevation / 2); // Green to white
-        }
-      
-        colors.push(color.r, color.g, color.b);
-      }
-      console.log(colors);
-      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
       console.log(geometry)
 
     // Create a scene
@@ -67,7 +39,7 @@ loadESRIASCII(url)
     // });
 
     // const material = new THREE.MeshBasicMaterial({side: THREE.BackSide});
-    const material = new THREE.MeshStandardMaterial({side: THREE.DoubleSide})
+    const material = new THREE.MeshStandardMaterial({side: THREE.DoubleSide, vertexColors: true})
 
     // Create a mesh using the terrain geometry and material
     const terrainMesh = new THREE.Mesh(geometry, material);
