@@ -1,8 +1,11 @@
 export async function loadESRIASCII(url) {
     try {
       const response = await fetch(url);
+      console.log(response);
       const text = await response.text();
+      console.log(text.length);
       const lines = text.split('\n');
+      console.log(lines[0]);
   
       const header = {};
       for (let i = 0; i < 6; i++) {

@@ -3,7 +3,8 @@ import { createBufferGeometry } from "./createBuffer.js";
 import { OrbitControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js'
 import {FlyControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/FlyControls.js'
 
-const url = 'data/gebco_2023_n22.6189_s18.2704_w-160.8926_e-153.9642.asc';
+const url = 'data/[hawaii]gebco_2023_n22.6189_s18.2704_w-160.8926_e-153.9642.asc';
+// const url = 'data/[california]gebco_2023_n42.3493_s30.8793_w-126.0111_e-117.5794.asc';
 loadESRIASCII(url)
   .then(result => {
     if (result) {

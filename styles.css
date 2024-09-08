@@ -8,3 +8,30 @@ body {
     font-family: inherit;
     color: inherit;
  }
+
+#controls-info {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#controls-info h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+#controls-info ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+#controls-info li {
+    margin-bottom: 5px;
+}
