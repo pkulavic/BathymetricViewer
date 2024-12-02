@@ -3,6 +3,7 @@ export function createBufferGeometry(header, data) {
 
     const { ncols, nrows, NODATA_value } = header;
     const cellsize = 450; // Assuming each cell is 450 meters by 450 meters
+    // const cellsize = 90; // 90 meters for NCEI data
 
   
     const positions = [];

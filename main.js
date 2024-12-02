@@ -4,9 +4,12 @@ import { OrbitControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/cont
 import { FlyControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/FlyControls.js'
 
 let url = 'data/[hawaii]gebco_2023_n22.6189_s18.2704_w-160.8926_e-153.9642.asc';
+// let url = 'output.asc';
 let scene, camera, renderer, controls, terrainMesh, clock, animationId;
 
 function init(url) {
+  let initialRenderComplete = false;
+
   loadESRIASCII(url)
     .then(result => {
       if (result) {
@@ -77,12 +80,17 @@ function init(url) {
         controls.dragToLook = true; // Set to true to enable drag to look around
 
         clock = new THREE.Clock();
-
+        
         // Update the controls in the animation loop
         function animate() {
           animationId = requestAnimationFrame(animate);
           controls.update(clock.getDelta());
           renderer.render(scene, camera);
+          if (!initialRenderComplete) {
+            initialRenderComplete = true;
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('loading-gif').style.display = 'none';
+          }
         }
 
         // Start the animation loop
@@ -114,6 +122,9 @@ function cleanup() {
   camera = null;
   controls = null;
   clock = null;
+
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('loading-gif').style.display = 'block';
 }
 
 // Initial load

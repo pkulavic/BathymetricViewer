@@ -9,6 +9,16 @@ body {
     color: inherit;
  }
 
+ #loading {
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+ }
+
+ #loading-gif {
+    display: block;
+    margin: 0 auto;
+ }
 #controls-info {
     position: absolute;
     bottom: 20px;
