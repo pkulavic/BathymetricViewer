@@ -4,7 +4,6 @@ import { OrbitControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/cont
 import { FlyControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/FlyControls.js'
 
 let url = 'data/[hawaii]gebco_2023_n22.6189_s18.2704_w-160.8926_e-153.9642.asc';
-// let url = 'output.asc';
 let scene, camera, renderer, controls, terrainMesh, clock, animationId;
 
 function init(url) {
