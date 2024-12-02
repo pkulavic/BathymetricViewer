@@ -12,8 +12,6 @@
 </head>
 <body>
     <p id="header">Bathymetric Viewer</p>
-    <p id="loading">Loading...</p>
-    <img src="loading.gif" alt="loading" id="loading-gif">
 
     <select id="dataset-selector">
         <option value="data/[hawaii]gebco_2023_n22.6189_s18.2704_w-160.8926_e-153.9642.asc">Hawaii</option>
@@ -21,6 +19,9 @@
         <option value="data/pioneer.asc">Pioneer Seamount</option>
         <!-- Add more options as needed -->
     </select>
+    
+    <p id="loading">Loading...</p>
+    <img src="loading.gif" alt="loading" id="loading-gif">
     
     <div id="controls-info">
         <h3>Navigation Controls:</h3>
