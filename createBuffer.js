@@ -44,14 +44,9 @@ export function createBufferGeometry(header, data) {
             maxDepth = Math.abs(elevation);
           }
         }
-  
-        // if (!isNaN(elevation) && elevation < 0) {
-        //   maxDepth = Math.max(maxDepth, Math.abs(elevation));
-        // }
       }
     }
     maxDepth *= elevationScale;
-    console.log("max depth: ",maxDepth);
 
     const colors = [];
     for (let i = 0; i < positions.length; i += 3) {
@@ -63,26 +58,6 @@ export function createBufferGeometry(header, data) {
         else if (elevation > 0) {
             color.setRGB(0, 0.5, 0) // green = land
         }
-        // else if (elevation < 0) {
-        //     // Below sea level (negative values)
-        //     const normalizedDepth = Math.min(Math.abs(elevation) / maxDepth, 1);
-        //     const hue = 0.6; // Blue hue
-        //     const saturation = 1;
-        //     const lightness = 1 - normalizedDepth * 0.9; // Adjust the multiplier to control the gradient
-        
-        //     color.setHSL(hue, saturation, lightness);
-        // }
-        // else if (elevation < 0) {
-        //     color.setRGB(0, 0, 0.75) // blue = ocean
-        // }
-        // else if (elevation < 0) {
-        //     // Below sea level (negative values)
-        //     const normalizedDepth = Math.abs(elevation) / maxDepth;
-        //     const r = 1 - normalizedDepth;
-        //     const g = 1 - normalizedDepth;
-        //     const b = 1;
-        //     color.setRGB(r, g, b);
-        // }
 
         else if (elevation < 0) {
           const cm_data = [[ 0.16295295, 0.09521592, 0.42257292],
@@ -344,13 +319,8 @@ export function createBufferGeometry(header, data) {
 
         // Convert elevation to a value between 0 and 255
         // Invert the normalization to make shallow values bigger and deeper values smaller
-        // if (Math.abs(elevation) / maxDepth > 1) {
-        //   console.log("elevation: ", elevation);
-        // }
         const invertedNormalizedDepth = 1 - Math.min(Math.abs(elevation) / maxDepth, 1);
         const colorIndex = Math.floor(invertedNormalizedDepth * 255);
-        // const normalizedDepth = Math.min(Math.abs(elevation) / maxDepth, 1);
-        // const colorIndex = Math.floor(normalizedDepth * 255);
         
         // Ensure the index is within bounds
         const safeIndex = Math.min(Math.max(colorIndex, 0), cm_data.length - 1);
@@ -361,7 +331,7 @@ export function createBufferGeometry(header, data) {
         // Set the color
         color.setRGB(r, g, b);
         }
-        else if (elevation < -6250) {
+        else if (elevation < -6250) { // ?
           color.setRGB(1, 0, 0); // Set color to red
       }
         colors.push(color.r, color.g, color.b);
@@ -373,4 +343,3 @@ export function createBufferGeometry(header, data) {
     return geometry;
   }
 
-  
